@@ -1,0 +1,118 @@
+{
+  "id": "edutrack",
+  "realm": "edutrack",
+  "enabled": true,
+  "sslRequired": "none",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": false,
+  "roles": {
+    "realm": [
+      { "name": "ESTUDIANTE" },
+      { "name": "DOCENTE" },
+      { "name": "REPORTES" }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "edutrack-web",
+      "name": "EduTrack Web",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "fullScopeAllowed": true,
+      "redirectUris": [
+        "https://oauth.pstmn.io/v1/callback"
+      ],
+      "webOrigins": [
+        "https://oauth.pstmn.io"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256"
+      },
+      "protocolMappers": [
+        {
+          "name": "realm-roles",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "multivalued": "true",
+            "userinfo.token.claim": "true",
+            "id.token.claim": "false",
+            "access.token.claim": "true",
+            "claim.name": "realm_access.roles",
+            "jsonType.label": "String"
+          }
+        }
+      ]
+    },
+    {
+      "clientId": "edutrack-reportes",
+      "name": "EduTrack Reportes",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "clientAuthenticatorType": "client-secret",
+      "standardFlowEnabled": false,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "fullScopeAllowed": true,
+      "protocolMappers": [
+        {
+          "name": "realm-roles",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "multivalued": "true",
+            "userinfo.token.claim": "true",
+            "id.token.claim": "false",
+            "access.token.claim": "true",
+            "claim.name": "realm_access.roles",
+            "jsonType.label": "String"
+          }
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": "8f14e45f-ea9d-4e1a-9c0a-000000000001",
+      "username": "valeria",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Valeria",
+      "lastName": "Estudiante",
+      "realmRoles": ["ESTUDIANTE"]
+    },
+    {
+      "id": "8f14e45f-ea9d-4e1a-9c0a-000000000002",
+      "username": "bruno",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Bruno",
+      "lastName": "Estudiante",
+      "realmRoles": ["ESTUDIANTE"]
+    },
+    {
+      "id": "8f14e45f-ea9d-4e1a-9c0a-000000000003",
+      "username": "salas",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Salas",
+      "lastName": "Docente",
+      "realmRoles": ["DOCENTE"]
+    },
+    {
+      "username": "service-account-edutrack-reportes",
+      "enabled": true,
+      "serviceAccountClientId": "edutrack-reportes",
+      "realmRoles": ["REPORTES"]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: edutrack
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${OAUTH2_ISSUER_URI:http://localhost:8180/realms/edutrack}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
